@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import SalesScreen from "../screens/SalesScreen";
+import SalesStack from "./SalesStack";
 import ExpensesScreen from "../screens/ExpensesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { theme } from "../theme/theme";
@@ -48,9 +48,17 @@ export default function MainTabs({ onLogout }: { onLogout: () => void }) {
         },
       })}
     >
-      <Tab.Screen name="Sales" component={SalesScreen} options={{ tabBarLabel: "Ventas" }} />
-      <Tab.Screen name="Expenses" component={ExpensesScreen} options={{ tabBarLabel: "Gastos" }} />
-      <Tab.Screen name="Profile">
+      <Tab.Screen
+        name="Sales"
+        component={SalesStack}
+        options={{ tabBarLabel: "Ventas" }}
+      />
+      <Tab.Screen
+        name="Expenses"
+        component={ExpensesScreen}
+        options={{ tabBarLabel: "Gastos" }}
+      />
+      <Tab.Screen name="Profile" options={{ tabBarLabel: "Perfil" }}>
         {(props: object) => <ProfileScreen {...(props as any)} onLogout={onLogout} />}
       </Tab.Screen>
     </Tab.Navigator>
