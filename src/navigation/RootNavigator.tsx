@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+import { useAuth } from "../context/AuthContext";
 import AuthStack from "./AuthStack";
 import MainTabs from "./MainTabs";
 
 export default function RootNavigator() {
-    const [isAuthed, setIsAuthed] = useState(false);
+    const { isAuthed, login, logout } = useAuth();
 
     return isAuthed ? (
-        <MainTabs onLogout={() => setIsAuthed(false)} />
+        <MainTabs onLogout={logout} />
     ) : (
-        <AuthStack onLoginSuccess={() => setIsAuthed(true)} />
+        <AuthStack
+            onLoginSuccess={() =>
+                login({ id: "1", name: "Usuario", email: "user@xentra.com" })
+            }
+        />
     );
 }

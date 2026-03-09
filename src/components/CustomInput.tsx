@@ -1,4 +1,3 @@
-// src/components/CustomInput.tsx
 import React, { useMemo } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { theme } from "../theme/theme";
