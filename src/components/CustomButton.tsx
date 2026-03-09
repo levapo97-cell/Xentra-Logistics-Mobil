@@ -12,7 +12,7 @@ type Props = {
     disabled?: boolean;
     style?: ViewStyle;
 };
-
+    
 export default function CustomButton({
     title,
     onPress,
