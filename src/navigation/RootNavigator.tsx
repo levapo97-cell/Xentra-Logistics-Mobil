@@ -7,7 +7,7 @@ export default function RootNavigator() {
     const { isAuthed, login, logout } = useAuth();
 
     return isAuthed ? (
-        <MainTabs onLogout={logout} />
+        <MainTabs />
     ) : (
         <AuthStack
             onLoginSuccess={() =>
