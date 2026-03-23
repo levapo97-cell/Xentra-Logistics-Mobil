@@ -15,6 +15,7 @@ export type Expense = {
     category: string;
     supplier?: string;
     receiptUri?: string;    // Foto / recibo (futuro)
+    status?: string;        // Pendiente, Aprobada, etc.
 };
 
 type ExpensesContextType = {

@@ -15,7 +15,7 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "../theme/theme";
-import CustomButton from "../components/CustomButton";
+import ERPButton from "../components/ERPButton";
 import {
     useSales,
     SalesDocType,
@@ -149,8 +149,8 @@ function LineModal({ visible, initial, onSave, onClose }: LineModalProps) {
                         </View>
                     </View>
                     <View style={{ gap: 8, marginTop: 8 }}>
-                        <CustomButton title="Guardar artículo" onPress={handleSave} variant="success" />
-                        <CustomButton title="Cancelar" onPress={onClose} variant="danger" outline />
+                        <ERPButton title="Guardar artículo" onPress={handleSave} variant="primary" />
+                        <ERPButton title="Cancelar" onPress={onClose} variant="ghost" />
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -354,8 +354,8 @@ export default function SalesFormScreen() {
 
                 {/* Botones */}
                 <View style={{ marginTop: theme.spacing.lg, gap: 10 }}>
-                    <CustomButton title="Guardar" onPress={handleSave} variant="primary" />
-                    <CustomButton title="Cancelar" onPress={() => navigation.goBack()} variant="danger" outline />
+                    <ERPButton title="Guardar" onPress={handleSave} variant="primary" />
+                    <ERPButton title="Cancelar" onPress={() => navigation.goBack()} variant="ghost" />
                 </View>
 
             </ScrollView>

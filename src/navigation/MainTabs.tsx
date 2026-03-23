@@ -1,66 +1,69 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import SalesStack from "./SalesStack";
-import ExpensesScreen from "../screens/ExpensesScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import { Text, Platform, View } from "react-native";
 import { theme } from "../theme/theme";
 
-export type MainTabsParamList = {
-  Sales: undefined;
-  Expenses: undefined;
-  Profile: undefined;
-};
+import SalesStack from "./SalesStack";
+import ExpensesStack from "./ExpensesStack"; 
+import ProfileScreen from "../screens/ProfileScreen";
 
-const Tab = createBottomTabNavigator<MainTabsParamList>();
+const Tab = createBottomTabNavigator();
 
-type IoniconsName = React.ComponentProps<typeof Ionicons>["name"];
+export default function MainTabs() {
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarShowLabel: true,
+                tabBarActiveTintColor: theme.colors.primary,
+                tabBarInactiveTintColor: theme.colors.muted,
+                tabBarStyle: {
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: Platform.OS === "ios" ? 85 : 65,
+                    backgroundColor: "#0B0B0F",
+                    borderTopWidth: 1,
+                    borderTopColor: "rgba(255,255,255,0.05)",
+                    paddingBottom: Platform.OS === "ios" ? 25 : 10,
+                    paddingTop: 10,
+                },
+                tabBarLabel: ({ focused, color }) => (
+                    <Text style={{ fontSize: 10, color, fontWeight: focused ? "700" : "500", marginTop: 4 }}>
+                        {route.name === "Sales" ? "Ventas"
+                         : route.name === "Expenses" ? "Gastos"
+                         : "Perfil"}
+                    </Text>
+                ),
+                tabBarIcon: ({ color, focused }) => {
+                    let iconName: any;
+                    if (route.name === "Sales") iconName = focused ? "briefcase" : "briefcase-outline";
+                    else if (route.name === "Expenses") iconName = focused ? "wallet" : "wallet-outline";
+                    else if (route.name === "Profile") iconName = focused ? "person-circle" : "person-circle-outline";
 
-const TAB_ICONS: Record<string, { active: IoniconsName; inactive: IoniconsName }> = {
-  Sales: { active: "cart", inactive: "cart-outline" },
-  Expenses: { active: "wallet", inactive: "wallet-outline" },
-  Profile: { active: "person-circle", inactive: "person-circle-outline" },
-};
-
-export default function MainTabs({ onLogout }: { onLogout: () => void }) {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.muted,
-        tabBarStyle: {
-          backgroundColor: theme.colors.card,
-          borderTopColor: theme.colors.border,
-          borderTopWidth: 1,
-          paddingBottom: 6,
-          paddingTop: 6,
-          height: 62,
-        },
-        tabBarLabelStyle: {
-          fontSize: 11,
-          fontWeight: "600",
-        },
-        tabBarIcon: ({ focused, color, size }) => {
-          const icons = TAB_ICONS[route.name];
-          const iconName = focused ? icons.active : icons.inactive;
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-    >
-      <Tab.Screen
-        name="Sales"
-        component={SalesStack}
-        options={{ tabBarLabel: "Ventas" }}
-      />
-      <Tab.Screen
-        name="Expenses"
-        component={ExpensesScreen}
-        options={{ tabBarLabel: "Gastos" }}
-      />
-      <Tab.Screen name="Profile" options={{ tabBarLabel: "Perfil" }}>
-        {(props: object) => <ProfileScreen {...(props as any)} onLogout={onLogout} />}
-      </Tab.Screen>
-    </Tab.Navigator>
-  );
+                    return (
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Ionicons name={iconName} size={24} color={color} />
+                            {focused && (
+                                <View style={{
+                                    position: 'absolute',
+                                    bottom: -18,
+                                    width: 4,
+                                    height: 4,
+                                    borderRadius: 2,
+                                    backgroundColor: theme.colors.primary
+                                }}/>
+                            )}
+                        </View>
+                    );
+                },
+            })}
+        >
+            <Tab.Screen name="Sales" component={SalesStack} />
+            <Tab.Screen name="Expenses" component={ExpensesStack} />
+            <Tab.Screen name="Profile" component={ProfileScreen} />
+        </Tab.Navigator>
+    );
 }
