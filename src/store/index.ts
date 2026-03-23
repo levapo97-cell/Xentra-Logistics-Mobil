@@ -1,10 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import appReducer from './slices/appSlice';
+import userReducer from './slices/userSlice';
+import inventoryReducer from './slices/inventorySlice';
+import expenseReducer from './slices/expenseSlice';
 
 export const store = configureStore({
     reducer: {
         app: appReducer,
-        // Aquí se agregarán los futuros reducers (sales, expenses, auth, etc.)
+        user: userReducer,
+        inventory: inventoryReducer,
+        expenses: expenseReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -14,3 +19,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+console.log('[Redux - Store] Store configurado exitosamente con reducers: app, user, inventory, expenses');

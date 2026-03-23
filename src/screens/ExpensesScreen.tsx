@@ -63,6 +63,14 @@ export default function ExpensesScreen() {
                     )}
                 />
             )}
+
+            {/* FAB para agregar gasto manual */}
+            <Pressable
+                style={({ pressed }) => [styles.fab, pressed && styles.fabPressed]}
+                onPress={() => navigation.navigate("ExpenseForm")}
+            >
+                <Ionicons name="add" size={32} color="#000" />
+            </Pressable>
         </View>
     );
 }
@@ -75,10 +83,10 @@ const styles = StyleSheet.create({
     },
     title: { color: theme.colors.text, fontSize: 28, fontWeight: "900", letterSpacing: -0.5 },
     ocrBtn: { 
-        flexDirection: 'row', alignItems: 'center', backgroundColor: theme.colors.primary, 
-        paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20, gap: 4 
+        flexDirection: 'row', alignItems: 'center', backgroundColor: theme.colors.card, 
+        paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20, gap: 6, borderWidth: 1, borderColor: theme.colors.border
     },
-    ocrText: { color: "#000", fontSize: 13, fontWeight: "800" },
+    ocrText: { color: theme.colors.primary, fontSize: 13, fontWeight: "800" },
     
     kpiRow: { flexDirection: 'row', paddingHorizontal: theme.spacing.lg, gap: 12, marginBottom: 24 },
     kpiCard: { flex: 1, backgroundColor: theme.colors.card, padding: 16, borderRadius: theme.radius.lg, borderWidth: 1, borderColor: theme.colors.border },
@@ -86,7 +94,26 @@ const styles = StyleSheet.create({
     kpiValue: { color: theme.colors.text, fontSize: 22, fontWeight: "900" },
     
     sectionTitle: { color: theme.colors.muted, fontSize: 13, fontWeight: "800", textTransform: 'uppercase', paddingHorizontal: theme.spacing.lg, marginBottom: 12, letterSpacing: 0.5 },
-    list: { paddingHorizontal: theme.spacing.lg, paddingBottom: 100 },
+    list: { paddingHorizontal: theme.spacing.lg, paddingBottom: 20 },
     emptyWrap: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 40 },
-    emptyText: { color: theme.colors.muted, fontSize: 15, fontWeight: "500" }
+    emptyText: { color: theme.colors.muted, fontSize: 15, fontWeight: "500" },
+
+    fab: {
+        position: "absolute",
+        bottom: 30,
+        right: 24,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: theme.colors.primary,
+        alignItems: "center",
+        justifyContent: "center",
+        shadowColor: theme.colors.primary,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.4,
+        shadowRadius: 12,
+        elevation: 8,
+        zIndex: 20
+    },
+    fabPressed: { transform: [{ scale: 0.92 }] },
 });
