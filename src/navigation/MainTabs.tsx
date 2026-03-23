@@ -6,6 +6,7 @@ import { theme } from "../theme/theme";
 
 import SalesStack from "./SalesStack";
 import ExpensesStack from "./ExpensesStack"; 
+import InventoryStack from "./InventoryStack";
 import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
@@ -19,10 +20,6 @@ export default function MainTabs() {
                 tabBarActiveTintColor: theme.colors.primary,
                 tabBarInactiveTintColor: theme.colors.muted,
                 tabBarStyle: {
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
                     height: Platform.OS === "ios" ? 85 : 65,
                     backgroundColor: "#0B0B0F",
                     borderTopWidth: 1,
@@ -34,6 +31,7 @@ export default function MainTabs() {
                     <Text style={{ fontSize: 10, color, fontWeight: focused ? "700" : "500", marginTop: 4 }}>
                         {route.name === "Sales" ? "Ventas"
                          : route.name === "Expenses" ? "Gastos"
+                         : route.name === "Inventory" ? "Stock"
                          : "Perfil"}
                     </Text>
                 ),
@@ -41,6 +39,7 @@ export default function MainTabs() {
                     let iconName: any;
                     if (route.name === "Sales") iconName = focused ? "briefcase" : "briefcase-outline";
                     else if (route.name === "Expenses") iconName = focused ? "wallet" : "wallet-outline";
+                    else if (route.name === "Inventory") iconName = focused ? "cube" : "cube-outline";
                     else if (route.name === "Profile") iconName = focused ? "person-circle" : "person-circle-outline";
 
                     return (
@@ -63,6 +62,7 @@ export default function MainTabs() {
         >
             <Tab.Screen name="Sales" component={SalesStack} />
             <Tab.Screen name="Expenses" component={ExpensesStack} />
+            <Tab.Screen name="Inventory" component={InventoryStack} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );

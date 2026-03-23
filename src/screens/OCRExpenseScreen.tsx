@@ -37,10 +37,22 @@ export default function OCRExpenseScreen() {
         </View>
     );
 
+    const { addExpense } = require('../context/ExpensesContext').useExpenses();
+
     const handleSimulateScan = () => {
         setScanned(true);
         setLoading(true);
         setTimeout(() => {
+            // Guardamos el gasto analizado por IA simulada
+            addExpense({
+                description: 'Gasto por extracción OCR',
+                amount: Math.floor(Math.random() * 500) + 50,
+                date: new Date().toISOString().split('T')[0],
+                category: 'Logística',
+                status: 'Pendiente',
+                supplier: 'Proveedor Automático'
+            });
+
             setLoading(false);
             navigation.goBack();
         }, 1500);
