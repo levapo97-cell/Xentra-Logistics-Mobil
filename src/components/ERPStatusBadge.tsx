@@ -17,6 +17,10 @@ const STATUS_COLORS: Record<string, string> = {
     Cancelada: theme.colors.danger,
     Pagada: theme.colors.success,
     Deuda: theme.colors.danger,
+    Activo: theme.colors.primary,
+    Activa: theme.colors.primary,
+    Inactivo: theme.colors.danger,
+    Inactiva: theme.colors.danger,
 };
 
 export default function ERPStatusBadge({ status }: Props) {
